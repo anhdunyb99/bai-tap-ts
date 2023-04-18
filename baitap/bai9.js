@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var promptSync = require("prompt-sync");
+var prompt = promptSync();
+var a, b, c, biggestNumber;
+a = parseInt(prompt('Nhap so nguyen a: '));
+b = parseInt(prompt('Nhap so nguyen b: '));
+c = parseInt(prompt('Nhap so nguyen c: '));
+biggestNumber = Math.max(a, b, c);
+console.log("So lon nhat la : ", biggestNumber);
