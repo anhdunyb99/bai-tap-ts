@@ -14,10 +14,10 @@ const object2: {fullName : string,occupation : string,age : number ,website : st
 
 //convert obj to array
 
-let arrayKey : any = Object.keys(object1)
-let arrayValue : any = Object.values(object1)
+const arrayKey : any = Object.keys(object1)
+const arrayValue : any = Object.values(object1)
 
-let array = arrayKey.concat(arrayValue)
+const array = arrayKey.concat(arrayValue)
 
 let printLine : any
 //in tren tung dong

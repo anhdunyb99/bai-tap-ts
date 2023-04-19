@@ -9,8 +9,8 @@ const arrayName : any = Object.keys(people)
 const arrayAge : any = Object.values(people)
 
 
-let highestAge : number = Math.max.apply(null,arrayAge)
-let indexArrayAge : number = arrayAge.indexOf(highestAge)
+const highestAge : number = Math.max.apply(null,arrayAge)
+const indexArrayAge : number = arrayAge.indexOf(highestAge)
 
 
 console.log('Nguoi lon tuoi nhat la',arrayName[indexArrayAge]);
