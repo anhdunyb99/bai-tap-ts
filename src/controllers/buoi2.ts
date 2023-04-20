@@ -1,6 +1,6 @@
 import express from 'express';
 
-export const bai1 = async (req: express.Request, res: express.Response) => {
+export const Compare = async (req: express.Request, res: express.Response) => {
     let array: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 0]
     const biggestNumber: number = Math.max.apply(null, array)
     const smallestNumber: number = Math.min.apply(null, array)
@@ -17,7 +17,7 @@ export const bai1 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai2 = async (req: express.Request, res: express.Response) => {
+export const compareNumber = async (req: express.Request, res: express.Response) => {
     let array: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 0]
     const biggestIndex: number = array.indexOf(Math.max.apply(null, array))
     const smallestIndex: number = array.indexOf(Math.min.apply(null, array))
@@ -34,7 +34,7 @@ export const bai2 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai3 = async (req: express.Request, res: express.Response) => {
+export const averageRain = async (req: express.Request, res: express.Response) => {
     const arraySize: number = 3
     let array: number[] = [1, 2, 3]
 
@@ -59,7 +59,7 @@ export const bai3 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai4 = async (req: express.Request, res: express.Response) => {
+export const ObjectData = async (req: express.Request, res: express.Response) => {
     const people: { Ana: number, Alex: Number, John: number } = {
         Ana: 25,
         Alex: 28,
@@ -83,7 +83,7 @@ export const bai4 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai5 = async (req: express.Request, res: express.Response) => {
+export const printObject = async (req: express.Request, res: express.Response) => {
     const object1: { fullName: string, occupation: string, age: number, website: string } = {
         fullName: 'Anoystick',
         occupation: 'Software developer',
@@ -124,7 +124,7 @@ export const bai5 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai6 = async (req: express.Request, res: express.Response) => {
+export const objectExecrise = async (req: express.Request, res: express.Response) => {
     let options = {
         size: {
             width: 100,
@@ -152,7 +152,7 @@ export const bai6 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai7 = async (req: express.Request, res: express.Response) => {
+export const interfaceExecrise = async (req: express.Request, res: express.Response) => {
     interface SinhVien {
         Ho: string,
         Ten: string,
@@ -185,7 +185,7 @@ export const bai7 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai8 = async (req: express.Request, res: express.Response) => {
+export const classExecrise = async (req: express.Request, res: express.Response) => {
     class Circle {
         public radious: any = 1.0
         public color: string = 'red'

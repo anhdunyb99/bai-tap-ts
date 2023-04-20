@@ -1,6 +1,6 @@
 import express from 'express';
 
-export const bai1 = async (req: express.Request, res: express.Response) => {
+export const sumInt = async (req: express.Request, res: express.Response) => {
     const a: number = 1
     const b: number = 2
     const sum: number = a + b
@@ -16,22 +16,22 @@ export const bai1 = async (req: express.Request, res: express.Response) => {
     }
 };
 
-export const bai2 = async (req: express.Request, res: express.Response) => {
+export const totalSum = async (req: express.Request, res: express.Response) => {
     const a: number = 1
     const b: number = 2
     const sum: number = a + b
-    const hieuSo: number = a - b
-    const tich: number = a * b
-    const thuong: any = a / b
+    const difference: number = a - b
+    const product: number = a * b
+    const quotient: any = a / b
 
     try {
         res.json({
             success: true,
             message: "Success",
             sum: sum,
-            hieuSo: hieuSo,
-            tich: tich,
-            thuong: thuong
+            difference: difference,
+            product: product,
+            quotient: quotient
         })
     } catch (error) {
         console.log(error);
@@ -39,7 +39,7 @@ export const bai2 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai3 = async (req: express.Request, res: express.Response) => {
+export const Multiples = async (req: express.Request, res: express.Response) => {
     const a: number = 3
 
     const b: number = a ** 2
@@ -60,18 +60,18 @@ export const bai3 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai4 = async (req: express.Request, res: express.Response) => {
+export const Rectangle = async (req: express.Request, res: express.Response) => {
     const a: number = 3
     const b: number = 4
-    const chuvi: number = a + b
-    const dientich: number = a * b
+    const perimeter: number = a + b
+    const acreage: number = a * b
 
     try {
         res.json({
             success: true,
             message: "Success",
-            chuvi: chuvi,
-            dientich: dientich
+            perimeter: perimeter,
+            acreage: acreage
         })
     } catch (error) {
         console.log(error);
@@ -79,18 +79,18 @@ export const bai4 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai5 = async (req: express.Request, res: express.Response) => {
+export const Globular = async (req: express.Request, res: express.Response) => {
     const a: number = 3
     const b: number = 4
-    const dientich: number = 4 * (a ** 2) * Math.PI
-    const thetich: number = (4 / 3) * Math.PI * (a ** 3)
+    const perimeter: number = 4 * (a ** 2) * Math.PI
+    const acreage: number = (4 / 3) * Math.PI * (a ** 3)
 
     try {
         res.json({
             success: true,
             message: "Success",
-            dientich: dientich,
-            thetich: thetich
+            perimeter: perimeter,
+            acreage: acreage
         })
     } catch (error) {
         console.log(error);
@@ -98,12 +98,10 @@ export const bai5 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai6 = async (req: express.Request, res: express.Response) => {
+export const dateExecrise = async (req: express.Request, res: express.Response) => {
     const a: number = 3
     const b: number = 4
     const c: number = 5
-    const dientich: number = 4 * (a ** 2) * Math.PI
-    const thetich: number = (4 / 3) * Math.PI * (a ** 3)
     let date: any
 
     if (a > 0 && a < 10 && b > 0 && b < 10) {
@@ -136,7 +134,7 @@ export const bai6 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai7 = async (req: express.Request, res: express.Response) => {
+export const Time = async (req: express.Request, res: express.Response) => {
     const a: number = 1000
     const time: any = new Date(a * 1000).toISOString().slice(11, 19)
 
@@ -152,7 +150,7 @@ export const bai7 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai8 = async (req: express.Request, res: express.Response) => {
+export const bigNumber = async (req: express.Request, res: express.Response) => {
     const a: number = 1000;
     const b: number = 100
     const biggestNumber: number = Math.max(a, b)
@@ -169,7 +167,7 @@ export const bai8 = async (req: express.Request, res: express.Response) => {
 }
 
 
-export const bai9 = async (req: express.Request, res: express.Response) => {
+export const biggestNumber = async (req: express.Request, res: express.Response) => {
     const a: number = 1000;
     const b: number = 100
     const c: number = 200
@@ -186,7 +184,7 @@ export const bai9 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai10 = async (req: express.Request, res: express.Response) => {
+export const Condition = async (req: express.Request, res: express.Response) => {
     const a: number = 1000;
     const b: number = 100
     const c: number = 200
@@ -208,7 +206,7 @@ export const bai10 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai11 = async (req: express.Request, res: express.Response) => {
+export const conditionDate = async (req: express.Request, res: express.Response) => {
     const a: number = 12
     let result: string = ''
     if (a >= 1 || a <= 12) {
@@ -236,22 +234,22 @@ export const bai11 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai12 = async (req: express.Request, res: express.Response) => {
-    let sophut: number = 600;
-    let tongtien: number
+export const phoneFee = async (req: express.Request, res: express.Response) => {
+    let time: number = 600;
+    let totalMoney: number
     const phi: number = 25000;
-    if (sophut > 200) {
-        tongtien = (sophut - 200) * 200 + 150 * 400 + 50 * 600
-    } else if (sophut > 50) {
-        tongtien = (sophut - 50) * 400 + 50 * 600
+    if (time > 200) {
+        totalMoney = (time - 200) * 200 + 150 * 400 + 50 * 600
+    } else if (time > 50) {
+        totalMoney = (time - 50) * 400 + 50 * 600
     } else {
-        tongtien = sophut * 600
+        totalMoney = time * 600
     }
     try {
         res.json({
             success: true,
             message: "Success",
-            tongtien: tongtien
+            totalMoney: totalMoney
         })
     } catch (error) {
         console.log(error);
@@ -259,7 +257,7 @@ export const bai12 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai13 = async (req: express.Request, res: express.Response) => {
+export const Fibonacci = async (req: express.Request, res: express.Response) => {
     let n: number = 10
     function Fibonacci(x: number): number {
         if (x == 1 || x == 2) {
@@ -280,7 +278,7 @@ export const bai13 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai14 = async (req: express.Request, res: express.Response) => {
+export const Reverse  = async (req: express.Request, res: express.Response) => {
     let a: number = 11;
     let result: number = 0;
     while (a > 0) {
@@ -301,7 +299,7 @@ export const bai14 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai15 = async (req: express.Request, res: express.Response) => {
+export const reverseNumber = async (req: express.Request, res: express.Response) => {
     let a: number = 11;
     let result: number = 0;
     while (a > 0) {
@@ -322,7 +320,7 @@ export const bai15 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai16 = async (req: express.Request, res: express.Response) => {
+export const biggestNumberOfArray = async (req: express.Request, res: express.Response) => {
     const a: number = 100;
     let string = a.toString()
     let array = string.split('')
@@ -341,7 +339,7 @@ export const bai16 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai17 = async (req: express.Request, res: express.Response) => {
+export const numberArray = async (req: express.Request, res: express.Response) => {
     let array: number[] = [1, 2, 8, 4, 5]
     const biggestNumber: number = Math.max.apply(null, array)
     const smallestNumber: number = Math.min.apply(null, array)
@@ -361,7 +359,7 @@ export const bai17 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai18 = async (req: express.Request, res: express.Response) => {
+export const primeNumber = async (req: express.Request, res: express.Response) => {
     const a: number = 100
     let result: any
     function isPrime(x: number) {
@@ -397,7 +395,7 @@ export const bai18 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai19 = async (req: express.Request, res: express.Response) => {
+export const printPrime = async (req: express.Request, res: express.Response) => {
 
     let a: number = 100;
     function isPrime(x: number) {
@@ -436,7 +434,7 @@ export const bai19 = async (req: express.Request, res: express.Response) => {
     }
 }
 
-export const bai20 = async (req: express.Request, res: express.Response) => {
+export const Prime = async (req: express.Request, res: express.Response) => {
     let a: number = 100;
 
     function isPrime(x: number) {
