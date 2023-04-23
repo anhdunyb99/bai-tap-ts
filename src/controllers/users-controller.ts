@@ -1,15 +1,17 @@
 const db = require('../models')
 import express from 'express'
-
+const moment = require('moment');
 // create main model
 const Users: any = db.users
+const RentBook: any = db.rents
+const Book: any = db.book
 
 // create user
 
 export const createUser = async (req: express.Request, res: express.Response) => {
     console.log('req.body', req.body);
 
-    let data = {
+    let data : any = {
         username: req.body.username,
         password: req.body.password,
         age: req.body.age,
@@ -17,11 +19,9 @@ export const createUser = async (req: express.Request, res: express.Response) =>
         last_name: req.body.lastName
 
     }
-    console.log('123');
-    console.log('data', data);
 
-    const user = await Users.create(data)
-    /*  res.status(200).send(user) */
+    const user : any = await Users.create(data)
+
     try {
         res.json({
             success: true,
@@ -36,7 +36,7 @@ export const createUser = async (req: express.Request, res: express.Response) =>
 }
 // get list user
 export const getListUser = async (req: express.Request, res: express.Response) => {
-    const listUser = await Users.findAll({})
+    const listUser : any  = await Users.findAll({})
     try {
         res.json({
             success: true,
@@ -54,12 +54,12 @@ export const getListUser = async (req: express.Request, res: express.Response) =
 
 export const updateUser = async (req: express.Request, res: express.Response) => {
     const id: any = req.params.id
-    const updatedUser = await Users.update(req.body , {where : {id : id}})
+    const updatedUser : any = await Users.update(req.body, { where: { id: id } })
     try {
         res.json({
             success: true,
             message: 'Update successfully',
-            data : req.body
+            data: req.body
         })
     } catch (error) {
         console.log(error);
@@ -72,12 +72,12 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
 
 export const getUserById = async (req: express.Request, res: express.Response) => {
     const id: any = req.params.id
-    const user = await Users.findOne({ where: { id: id } })
+    const user : any = await Users.findOne({ where: { id: id } })
     try {
         res.json({
             success: true,
             message: 'success',
-            data : user
+            data: user
         })
     } catch (error) {
         console.log(error);
@@ -90,11 +90,76 @@ export const getUserById = async (req: express.Request, res: express.Response) =
 
 export const deleteUser = async (req: express.Request, res: express.Response) => {
     const id: any = req.params.id
-    await Users.destroy({where : {id : id}})
+    await Users.destroy({ where: { id: id } })
     try {
         res.json({
             success: true,
             message: 'Delete user successfully',
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+
+}
+
+// rent book
+export const rentBook = async (req: express.Request, res: express.Response) => {
+    /* const userId: any = req.params.id    */
+    const userBook : any = await RentBook.findAll({ where: { users: req.params.id } })
+    if (userBook.length > 3) {
+        res.status(400).json({ success: false, message: "You rent too many books" })
+    } else {
+        let data: any = {
+            books: req.body.book,
+            users: req.params.id,
+            start_time: new Date(req.body.startTime),
+            end_time: new Date(req.body.startTime)
+        }
+        const rent = await RentBook.create(data)
+
+        try {
+            res.json({
+                success: true,
+                message: 'Rent book successfully',
+                data : rent
+            })
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ success: false, message: "Internal server error" });
+        }
+    }
+
+}
+
+// get list rent books
+
+
+export const getListRentBook = async (req: express.Request, res: express.Response) => {
+    const listRentBook : any = await RentBook.findAll({ where: { users: req.params.id } })
+    
+    try {
+        res.json({
+            success: true,
+            message: 'Get list rent book successfully',
+            data : listRentBook
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+
+}
+
+// out date book
+
+export const getOutDateBook = async (req: express.Request, res: express.Response) => {
+    
+    try {
+        res.json({
+            success: true,
+            message: 'Get list rent book successfully',
+            /* data : listRentBook */
         })
     } catch (error) {
         console.log(error);

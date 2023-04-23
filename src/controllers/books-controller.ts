@@ -5,7 +5,7 @@ import express from 'express'
 const Book: any = db.book
 // create book
 export const createBook = async (req: express.Request, res: express.Response) => {
-    let data = {
+    let data : any = {
         name: req.body.name,
         price: req.body.price,
         category: req.body.category,
@@ -13,7 +13,7 @@ export const createBook = async (req: express.Request, res: express.Response) =>
         outdate : new Date(req.body.outdate)
     }
     
-    const books = await Book.create(data)
+    const books : any = await Book.create(data)
     try {
         res.json({
             success: true,
@@ -29,7 +29,7 @@ export const createBook = async (req: express.Request, res: express.Response) =>
 
 // get list book
 export const getListBook = async (req: express.Request, res: express.Response) => {
-    const listBook = await Book.findAll({})
+    const listBook : any = await Book.findAll({})
     try {
         res.json({
             success: true,
@@ -47,7 +47,7 @@ export const getListBook = async (req: express.Request, res: express.Response) =
 
 export const getBookById = async (req: express.Request, res: express.Response) => {
     const id: any = req.params.id
-    const book = await Book.findOne({ where: { id: id } })
+    const book : any = await Book.findOne({ where: { id: id } })
     try {
         res.json({
             success: true,
@@ -65,7 +65,7 @@ export const getBookById = async (req: express.Request, res: express.Response) =
 
 export const updateBook = async (req: express.Request, res: express.Response) => {
     const id: any = req.params.id
-    const updatedBook = await Book.update(req.body , {where : {id : id}})
+    const updatedBook : any = await Book.update(req.body , {where : {id : id}})
     try {
         res.json({
             success: true,
@@ -95,3 +95,4 @@ export const deleteBook = async (req: express.Request, res: express.Response) =>
     }
 
 }
+

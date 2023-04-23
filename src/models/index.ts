@@ -35,6 +35,7 @@ db.sequelize = sequelize
 
 db.users = require('./users-model')(sequelize, DataTypes)
 db.book = require('./books-model')(sequelize, DataTypes)
+db.rents = require('./rent-model')(sequelize, DataTypes)
 
 db.sequelize.sync({force : false})
 .then(() => {
