@@ -1,5 +1,5 @@
 import express from 'express'
-import { createUser , getListUser , updateUser , getUserById , deleteUser , rentBook , getListRentBook} from '../controllers/users-controller'
+import { createUser , getListUser , updateUser , getUserById , deleteUser } from '../controllers/users-controller'
 
 export default (router : express.Router) => {
     router.post('/users',createUser)
@@ -8,7 +8,5 @@ export default (router : express.Router) => {
     router.get('/users/:id',getUserById)
     router.delete('/users/:id',deleteUser)
 
-    //rent 
-    router.post('/users/:id',rentBook)
-    router.get('/users/:id',getListRentBook)
+    
 }

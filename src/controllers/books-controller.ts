@@ -1,8 +1,8 @@
-const db = require('../models')
+
 import express from 'express'
-import { getListBooks , getBookByIds , createBooks , updateBooks } from '../services/books-service'
+import { getListBooks , getBookByIds , createBooks , updateBooks , deleteBooks} from '../services/books-service'
 // create main model
-const Book: any = db.book
+
 // create book
 export const createBook = async (req: express.Request, res: express.Response) => {
 
@@ -76,9 +76,9 @@ export const updateBook = async (req: express.Request, res: express.Response) =>
 //delete book
 
 export const deleteBook = async (req: express.Request, res: express.Response) => {
-    const id: any = req.params.id
-    await Book.destroy({where : {id : id}})
+    
     try {
+        await deleteBooks(req.params.id)
         res.json({
             success: true,
             message: 'Delete book successfully',

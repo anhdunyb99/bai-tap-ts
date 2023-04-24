@@ -1,11 +1,10 @@
-const db = require('../models')
+
 import express from 'express'
 import { getListUsers, getUserByIds , createUsers ,updateUsers , deleteUsers } from "../services/users-service"
 const moment = require('moment');
 // create main model
-const Users: any = db.users
-const RentBook: any = db.rents
-const Book: any = db.book
+
+
 
 // create user
 
@@ -93,8 +92,8 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
 }
 
 // rent book
-export const rentBook = async (req: express.Request, res: express.Response) => {
-    /* const userId: any = req.params.id    */
+/* export const rentBook = async (req: express.Request, res: express.Response) => {
+    
     const userBook: any = await RentBook.findAll({ where: { users: req.params.id } })
     if (userBook.length > 3) {
         res.status(400).json({ success: false, message: "You rent too many books" })
@@ -119,12 +118,12 @@ export const rentBook = async (req: express.Request, res: express.Response) => {
         }
     }
 
-}
+} */
 
 // get list rent books
 
 
-export const getListRentBook = async (req: express.Request, res: express.Response) => {
+/* export const getListRentBook = async (req: express.Request, res: express.Response) => {
     const listRentBook: any = await RentBook.findAll({ where: { users: req.params.id } })
 
     try {
@@ -138,21 +137,20 @@ export const getListRentBook = async (req: express.Request, res: express.Respons
         res.status(500).json({ success: false, message: "Internal server error" });
     }
 
-}
+} */
 
 // out date book
-
-export const getOutDateBook = async (req: express.Request, res: express.Response) => {
-
+export const Login = async (req: express.Request, res: express.Response) => {
     try {
+        
         res.json({
             success: true,
-            message: 'Get list rent book successfully',
-            /* data : listRentBook */
+            message: 'Login successfully',
+            
         })
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-
+     
 }

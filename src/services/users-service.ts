@@ -1,8 +1,8 @@
 import express from 'express'
 import ICreateUserDto from '../dtos/user/user.dto'
 import IUpdateUserDto from '../dtos/user/user.dto'
-const db = require('../models')
-const Users: any = db.users
+const db = require('../models/index')
+const Users: any = db.User
 
 
 export const getListUsers = async () => {
