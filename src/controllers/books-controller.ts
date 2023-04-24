@@ -1,20 +1,13 @@
 const db = require('../models')
 import express from 'express'
-
+import { getListBooks , getBookByIds , createBooks , updateBooks } from '../services/books-service'
 // create main model
 const Book: any = db.book
 // create book
 export const createBook = async (req: express.Request, res: express.Response) => {
-    let data : any = {
-        name: req.body.name,
-        price: req.body.price,
-        category: req.body.category,
-        description: req.body.description,
-        outdate : new Date(req.body.outdate)
-    }
-    
-    const books : any = await Book.create(data)
+
     try {
+        const books : any = await createBooks(req.body)
         res.json({
             success: true,
             message: 'Create book successfully',
@@ -29,8 +22,9 @@ export const createBook = async (req: express.Request, res: express.Response) =>
 
 // get list book
 export const getListBook = async (req: express.Request, res: express.Response) => {
-    const listBook : any = await Book.findAll({})
+    
     try {
+        const listBook : any = await getListBooks()
         res.json({
             success: true,
             message: 'Get list successfully',
@@ -43,12 +37,12 @@ export const getListBook = async (req: express.Request, res: express.Response) =
 
 }
 
-// get user by id 
+// get book by id 
 
 export const getBookById = async (req: express.Request, res: express.Response) => {
-    const id: any = req.params.id
-    const book : any = await Book.findOne({ where: { id: id } })
+    
     try {
+        const book : any = await getBookByIds(req.params.id)
         res.json({
             success: true,
             message: 'success',
@@ -64,9 +58,9 @@ export const getBookById = async (req: express.Request, res: express.Response) =
 // update book
 
 export const updateBook = async (req: express.Request, res: express.Response) => {
-    const id: any = req.params.id
-    const updatedBook : any = await Book.update(req.body , {where : {id : id}})
+    
     try {
+        const data : any = updateBooks(req.body)
         res.json({
             success: true,
             message: 'Update successfully',
