@@ -31,26 +31,17 @@ export const deleteBooks = async (bookId: string) => {
     return await Book.findOneAndDelete(condition)
 }
 
-/* export const getBookByUserId = async (userId: string) => {
-    const user: any = await User.findOne({
-        where: { id: userId },
-        include: db.Book,
-    });
-    
-    const books = user?.Books || [];
-    return books;
-} */
+
 
 export const rentBooks = async (userId: string, bookId: string, rentBookDto: IRentBookDto) => {
 
     console.log('rentBookDto', rentBookDto.start_time);
-    /* console.log('rentBookDto', bookId); */
+    
     await Users.updateOne(
         { _id: userId },
         { $push: { books: { book: bookId, start_time: rentBookDto.start_time, end_time: rentBookDto.end_time } } }
     )
-    /* const data = await Users.findById(userId).populate('book')
-    console.log('data',data); */
+    
     await Book.updateOne(
         { _id: bookId },
         { $push: { user: userId } }

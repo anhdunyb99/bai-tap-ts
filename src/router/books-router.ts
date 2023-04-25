@@ -8,6 +8,4 @@ export default (router: express.Router) => {
     router.put('/books/:id', verifyToken, updateBook)
     router.delete('/books/:id', verifyToken, deleteBook)
 
-    /* router.get("/books/rent/:id", verifyToken, getBooksByUserId) */
-    /* router.get("/books/rent/:id", verifyToken, getBooksByUserId) */
 }

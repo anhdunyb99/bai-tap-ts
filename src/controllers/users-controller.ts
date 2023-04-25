@@ -91,74 +91,7 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
     }
 
 }
-
 // rent book
-/* export const rentBook = async (req: express.Request, res: express.Response) => {
-    
-    const userBook: any = await RentBook.findAll({ where: { users: req.params.id } })
-    if (userBook.length > 3) {
-        res.status(400).json({ success: false, message: "You rent too many books" })
-    } else {
-        let data: any = {
-            books: req.body.book,
-            users: req.params.id,
-            start_time: new Date(req.body.startTime),
-            end_time: new Date(req.body.startTime)
-        }
-        const rent = await RentBook.create(data)
-
-        try {
-            res.json({
-                success: true,
-                message: 'Rent book successfully',
-                data: rent
-            })
-        } catch (error) {
-            console.log(error);
-            res.status(500).json({ success: false, message: "Internal server error" });
-        }
-    }
-
-} */
-
-// get list rent books
-
-
-/* export const getListRentBook = async (req: express.Request, res: express.Response) => {
-    const listRentBook: any = await RentBook.findAll({ where: { users: req.params.id } })
-
-    try {
-        res.json({
-            success: true,
-            message: 'Get list rent book successfully',
-            data: listRentBook
-        })
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
-
-} */
-
-// out date book
-/* export const rentBook = async (req: express.Request, res: express.Response) => {
-    try {
-        await rentBooks(
-            req.params.bookId,
-            req.params.userId,
-            req.body
-          );
-        res.json({
-            success: true,
-            message: 'Rent book successfully',
-            
-        })
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
-     
-} */
 
 export const rentBook = async (req: express.Request, res: express.Response) => {
     try {

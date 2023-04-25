@@ -90,20 +90,3 @@ export const deleteBook = async (req: express.Request, res: express.Response) =>
 
 }
 
-// get book by user id 
-/* export const getBooksByUserId = async (req: express.Request, res: express.Response) => {
-    try {
-        const books : any = await getBookByUserId(req.params.id)
-        res.json({
-            success: true,
-            message: 'Create book successfully',
-            data: books
-        })
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ success: false, message: "Internal server error" });
-    }
-     
-}
-
- */
