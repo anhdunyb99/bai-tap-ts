@@ -67,7 +67,7 @@ export const Login = async (req: express.Request, res: express.Response) => {
         if (condition.password === req.body.password) {
             accessToken = jwt.sign(
                 { userId: condition._id },
-                'asdsadsadadqwe'
+                'asdsadsadadqwe' , { expiresIn: '1h' }
             );
         } else {
             return res

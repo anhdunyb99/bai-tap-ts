@@ -23,5 +23,13 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Book',
   });
+
+  Book.associate = (models) => {
+    models.Book.belongsToMany(models.User, {
+      through: models.UserBook,
+      foreignKey: "bookId",
+      otherKey: "userId",
+    });
+  };
   return Book;
 };

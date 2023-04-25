@@ -1,6 +1,6 @@
 
 import express from 'express'
-import { getListUsers, getUserByIds , createUsers ,updateUsers , deleteUsers } from "../services/users-service"
+import { getListUsers, getUserByIds , createUsers ,updateUsers , deleteUsers , rentBooks } from "../services/users-service"
 const moment = require('moment');
 // create main model
 
@@ -140,12 +140,16 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
 } */
 
 // out date book
-export const Login = async (req: express.Request, res: express.Response) => {
+export const rentBook = async (req: express.Request, res: express.Response) => {
     try {
-        
+        await rentBooks(
+            req.params.bookId,
+            req.params.userId,
+            req.body
+          );
         res.json({
             success: true,
-            message: 'Login successfully',
+            message: 'Rent book successfully',
             
         })
     } catch (error) {
@@ -154,3 +158,5 @@ export const Login = async (req: express.Request, res: express.Response) => {
     }
      
 }
+
+

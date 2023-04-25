@@ -18,10 +18,18 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     username:DataTypes.STRING,
-    password : DataTypes.STRING
+    password : DataTypes.STRING,
+    recent_rent_date:DataTypes.DATE
   }, {
     sequelize,
     modelName: 'User',
   });
+  User.associate = (models) => {
+    models.User.belongsToMany(models.Book, {
+      through: models.UserBook,
+      foreignKey: "userId",
+      otherKey: "bookId",
+    });
+  };
   return User;
 };
