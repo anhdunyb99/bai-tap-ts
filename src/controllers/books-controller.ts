@@ -1,6 +1,6 @@
 
 import express from 'express'
-import { getListBooks , getBookByIds , createBooks , updateBooks , deleteBooks , getBookByUserId} from '../services/books-service'
+import { getListBooks , getBookByIds , createBooks , updateBooks , deleteBooks , /* getBookByUserId */} from '../services/books-service'
 // create main model
 
 // create book
@@ -60,7 +60,7 @@ export const getBookById = async (req: express.Request, res: express.Response) =
 export const updateBook = async (req: express.Request, res: express.Response) => {
     
     try {
-        const data : any = updateBooks(req.body)
+        const data : any = updateBooks(req.body,req.params.id)
         res.json({
             success: true,
             message: 'Update successfully',
@@ -91,7 +91,7 @@ export const deleteBook = async (req: express.Request, res: express.Response) =>
 }
 
 // get book by user id 
-export const getBooksByUserId = async (req: express.Request, res: express.Response) => {
+/* export const getBooksByUserId = async (req: express.Request, res: express.Response) => {
     try {
         const books : any = await getBookByUserId(req.params.id)
         res.json({
@@ -106,3 +106,4 @@ export const getBooksByUserId = async (req: express.Request, res: express.Respon
      
 }
 
+ */

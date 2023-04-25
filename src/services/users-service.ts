@@ -2,34 +2,40 @@ import express from 'express'
 import ICreateUserDto from '../dtos/user/user.dto'
 import IUpdateUserDto from '../dtos/user/user.dto'
 import IRentBookDto from '../dtos/book/book.dto'
-import { getBookByUserId , getBookByIds } from './books-service'
-import { log } from 'console'
-const db = require('../models/index')
-const Users: any = db.User
+/* import { getBookByUserId , getBookByIds } from './books-service' */
+const Users = require('../models/user')
 
 
 export const getListUsers = async () => {
-    return await Users.findAll({})
+    return await Users.find({})
 }
 
 export const getUserByIds = async (userId: string) => {
-    return await Users.findOne({ where: { id: userId } })
+    return await Users.findById(userId)
 }
 
 export const createUsers = async (createUserDto: Partial<ICreateUserDto>) => {
-    return await Users.create(createUserDto)
+    const newUser = new Users(createUserDto)
+    await newUser.save()
+    return newUser
 }
 
-export const updateUsers = async (updateUserDto: Partial<IUpdateUserDto>) => {
-    return await Users.create(updateUserDto)
+export const updateUsers = async (updateUserDto: Partial<IUpdateUserDto>,userId : String) => {
+    const condition = {
+        _id : userId
+    }
+    return await Users.findOneAndUpdate(condition,updateUserDto)
 }
 
 
 export const deleteUsers = async (userId: string) => {
-    return await Users.destroy({ where: { id: userId } })
+    const condition = {
+        _id : userId
+    }
+    return await Users.findOneAndDelete(condition)
 }
 
-export const rentBooks = async (bookId: string, userId: string, rentBookDto: IRentBookDto) => {
+/* export const rentBooks = async (bookId: string, userId: string, rentBookDto: IRentBookDto) => {
     const user: any = await getUserByIds(userId)
     const rentedBooks: any = await getBookByUserId(userId);
     const bookNumber : number = rentedBooks.length
@@ -53,4 +59,4 @@ export const rentBooks = async (bookId: string, userId: string, rentBookDto: IRe
         }
     }
 
-}
+} */

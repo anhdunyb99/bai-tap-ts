@@ -1,35 +1,33 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class Book extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  }
-  Book.init({
-    name: DataTypes.STRING,
-    price: DataTypes.DOUBLE,
-    category: DataTypes.ENUM('action', 'love', 'knowledge', 'detective'),
-    description: DataTypes.STRING,
-    outdated: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Book',
-  });
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-  Book.associate = (models) => {
-    models.Book.belongsToMany(models.User, {
-      through: models.UserBook,
-      foreignKey: "bookId",
-      otherKey: "userId",
-    });
-  };
-  return Book;
-};
+const BookSchema = new Schema({
+    name : {
+        type : String,
+        require : true ,
+    },
+    price : {
+        type : Number,
+        require : true
+    },
+    category : {
+        type : String,
+        enum : ['action', 'love', 'knowledge', 'detective'],
+        require : true
+    },
+    description : {
+        type : String,
+        require : true,
+    },
+    outdated : {
+        type : Date,
+        require : true
+    },
+    
+    user : [{
+        type : Schema.Types.ObjectId,
+        ref : 'users'
+    }]
+})
+
+module.exports = mongoose.model('books',BookSchema)

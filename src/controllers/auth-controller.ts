@@ -1,9 +1,8 @@
 import express from 'express'
-import { Registers } from '../services/auth-service'
+/* import { Registers } from '../services/auth-service' */
 import { createUsers } from '../services/users-service'
 const jwt = require('jsonwebtoken')
-const db = require('../models/index')
-const Users: any = db.User
+const Users = require('../models/user')
 //register
 
 export const Register = async (req: express.Request, res: express.Response) => {
@@ -13,9 +12,10 @@ export const Register = async (req: express.Request, res: express.Response) => {
             .json({ success: false, message: "Missing username or password" });
     }
     try {
-        const condition = await Users.findOne({ where: { username: req.body.username } })
-        //check trung ten
-
+        const condition = await Users.findOne({username: req.body.username})
+        //check trung ten   
+        console.log('condition',condition);
+        
         if (condition) {
             return res
                 .status(400)
@@ -54,7 +54,7 @@ export const Login = async (req: express.Request, res: express.Response) => {
     }
     try {
         let accessToken : string = ''
-        const condition = await Users.findOne({ where: { username: req.body.username } })
+        const condition = await Users.findOne({username: req.body.username })
         //check trung ten
 
         if (!condition) {

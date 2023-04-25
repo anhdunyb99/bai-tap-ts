@@ -1,6 +1,7 @@
 
 import express from 'express'
-import { getListUsers, getUserByIds , createUsers ,updateUsers , deleteUsers , rentBooks } from "../services/users-service"
+import { getListUsers, getUserByIds, createUsers, updateUsers, deleteUsers } from "../services/users-service"
+import { rentBooks, listRentBook } from '../services/books-service';
 const moment = require('moment');
 // create main model
 
@@ -43,7 +44,7 @@ export const getListUser = async (req: express.Request, res: express.Response) =
 
 export const updateUser = async (req: express.Request, res: express.Response) => {
     try {
-        const updatedUser: any = await updateUsers(req.body)
+        const updatedUser: any = await updateUsers(req.body, req.params.id)
         res.json({
             success: true,
             message: 'Update successfully',
@@ -140,7 +141,7 @@ export const deleteUser = async (req: express.Request, res: express.Response) =>
 } */
 
 // out date book
-export const rentBook = async (req: express.Request, res: express.Response) => {
+/* export const rentBook = async (req: express.Request, res: express.Response) => {
     try {
         await rentBooks(
             req.params.bookId,
@@ -157,6 +158,45 @@ export const rentBook = async (req: express.Request, res: express.Response) => {
         res.status(500).json({ success: false, message: "Internal server error" });
     }
      
+} */
+
+export const rentBook = async (req: express.Request, res: express.Response) => {
+    try {
+        await rentBooks(
+            req.params.userId,
+            req.params.bookId,
+            req.body
+        );
+        console.log('123');
+
+        res.json({
+            success: true,
+            message: 'Rent book successfully',
+
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+
 }
 
+// get all rent book
+export const listRentBooks = async (req: express.Request, res: express.Response) => {
+    try {
+        const data = await listRentBook(
+            req.params.userId,
+            req.params.bookId,
+        );
+        
+        res.json({
+            success: true,
+            message: 'Rent book successfully',
+            data : data
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
 
+}
