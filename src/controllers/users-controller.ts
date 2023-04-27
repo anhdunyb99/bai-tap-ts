@@ -43,7 +43,7 @@ export const getListUser = async (req: express.Request, res: express.Response) =
 
 export const updateUser = async (req: express.Request, res: express.Response) => {
     try {
-        const updatedUser: any = await updateUsers(req.body)
+        const updatedUser: any = await updateUsers(req.body,req.params.id)
         res.json({
             success: true,
             message: 'Update successfully',

@@ -3,7 +3,11 @@ export default interface ICreateUserDto {
   firstName: string,
   lastName: string,
   username: string,
-  password: string
+  password: string,
+  roleId : number,
+  birthday : Date,
+  status : string,
+  codeId : string,
 }
 
 export default interface IUpdateUserDto {
@@ -11,5 +15,9 @@ export default interface IUpdateUserDto {
   firstName: string,
   lastName: string,
   username: string,
-  password: string
+  password: string,
+  roleId : number,
+  birthday : Date,
+  status : string,
+  codeId : string,
 }

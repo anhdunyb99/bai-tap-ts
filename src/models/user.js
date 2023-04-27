@@ -17,19 +17,22 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
-    username:DataTypes.STRING,
-    password : DataTypes.STRING,
-    recent_rent_date:DataTypes.DATE
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+    roleId: DataTypes.INTEGER,
+    birthday: DataTypes.DATE,
+    status: DataTypes.ENUM('active', 'inactive'),
+    codeId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'User',
   });
-  User.associate = (models) => {
+  /* User.associate = (models) => {
     models.User.belongsToMany(models.Book, {
       through: models.UserBook,
       foreignKey: "userId",
       otherKey: "bookId",
     });
-  };
+  }; */
   return User;
 };

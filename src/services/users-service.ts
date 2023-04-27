@@ -20,8 +20,10 @@ export const createUsers = async (createUserDto: Partial<ICreateUserDto>) => {
     return await Users.create(createUserDto)
 }
 
-export const updateUsers = async (updateUserDto: Partial<IUpdateUserDto>) => {
-    return await Users.create(updateUserDto)
+export const updateUsers = async (updateUserDto: Partial<IUpdateUserDto>, userId : string) => {
+    return await Users.update(updateUserDto,{
+        where : { id : userId}
+    })
 }
 
 
