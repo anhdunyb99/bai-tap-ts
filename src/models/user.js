@@ -27,12 +27,15 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
-  /* User.associate = (models) => {
-    models.User.belongsToMany(models.Book, {
-      through: models.UserBook,
+  User.associate = (models) => {
+    models.User.belongsToMany(models.Project, {
+      through: models.UserProject,
       foreignKey: "userId",
-      otherKey: "bookId",
+      otherKey: "projectId",
     });
-  }; */
+    models.User.hasMany(models.Task, {
+      foreignKey: "userId",
+    });
+  };
   return User;
 };

@@ -21,5 +21,10 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
     modelName: 'Priority',
   });
+  Priority.associate = (models) => {
+    models.Priority.hasMany(models.Task, {
+      foreignKey: "priorityId",
+    });
+  };
   return Priority;
 };

@@ -22,5 +22,11 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
     modelName: 'Type',
   });
+
+  Type.associate = (models) => {
+    models.Status.hasMany(models.Task, {
+      foreignKey: "typeId",
+    });
+  };
   return Type;
 };

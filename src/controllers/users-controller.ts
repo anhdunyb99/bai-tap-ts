@@ -1,6 +1,6 @@
 
 import express from 'express'
-import { getListUsers, getUserByIds , createUsers ,updateUsers , deleteUsers , rentBooks } from "../services/users-service"
+import { getListUsers, getUserByIds , createUsers ,updateUsers , deleteUsers , rentBooks, createInviteCodes } from "../services/users-service"
 const moment = require('moment');
 // create main model
 
@@ -158,5 +158,23 @@ export const rentBook = async (req: express.Request, res: express.Response) => {
     }
      
 }
+
+// create invite code
+export const createInviteCode = async (req: express.Request, res: express.Response) => {
+    try {
+        await createInviteCodes(req.body)
+        res.json({
+            success: true,
+            message: 'Create invite code successfully',
+            data : req.body
+            
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ success: false, message: "Internal server error" });
+    }
+     
+}
+
 
 

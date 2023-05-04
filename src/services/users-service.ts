@@ -2,18 +2,30 @@ import express from 'express'
 import ICreateUserDto from '../dtos/user/user.dto'
 import IUpdateUserDto from '../dtos/user/user.dto'
 import IRentBookDto from '../dtos/book/book.dto'
+import ICode from 'dtos/code-interface/code-interface'
 import { getBookByUserId , getBookByIds } from './books-service'
 import { log } from 'console'
 const db = require('../models/index')
 const Users: any = db.User
+const Codes: any = db.Code
 
 
-export const getListUsers = async () => {
+export const getListUsers = async () : Promise<void> => {
     return await Users.findAll({})
 }
 
 export const getUserByIds = async (userId: string) => {
-    return await Users.findOne({ where: { id: userId } })
+    return await Users.findOne({ where: { id: userId },
+    include : [{
+        model: db.Project,
+        through: { attributes: [] }
+    },
+    {
+        model: db.Task,
+    }
+]
+    
+    })
 }
 
 export const createUsers = async (createUserDto: Partial<ICreateUserDto>) => {
@@ -54,5 +66,8 @@ export const rentBooks = async (bookId: string, userId: string, rentBookDto: IRe
             
         }
     }
+}
 
+export const createInviteCodes = async (code: Partial<ICode>) => {
+    return await Codes.create(code)
 }
