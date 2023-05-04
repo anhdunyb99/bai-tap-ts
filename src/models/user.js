@@ -19,9 +19,15 @@ module.exports = (sequelize, DataTypes) => {
     lastName: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    roleId: DataTypes.INTEGER,
+    roleId: {
+      type : DataTypes.INTEGER,
+      defaultValue : 2
+    },
     birthday: DataTypes.DATE,
-    status: DataTypes.ENUM('active', 'inactive'),
+    status: {
+      type : DataTypes.ENUM('active', 'inactive'),
+      defaultValue : 'active'
+    },
     codeId: DataTypes.INTEGER
   }, {
     sequelize,
@@ -35,6 +41,9 @@ module.exports = (sequelize, DataTypes) => {
     });
     models.User.hasMany(models.Task, {
       foreignKey: "userId",
+    });
+    models.User.belongsTo(models.Role, {
+      foreignKey: "roleId",
     });
   };
   return User;

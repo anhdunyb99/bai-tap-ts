@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     order: DataTypes.INTEGER,
     start_date: DataTypes.DATE,
-    end_date: DataTypes.DATE
+    end_date: DataTypes.DATE,
+    assignee : DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Task',

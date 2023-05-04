@@ -8,5 +8,5 @@ export default interface ITask {
     order: number,
     start_date: Date,
     end_date: Date,
-
+    assignee: string
 }

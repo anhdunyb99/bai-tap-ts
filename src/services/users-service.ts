@@ -68,6 +68,13 @@ export const rentBooks = async (bookId: string, userId: string, rentBookDto: IRe
     }
 }
 
+//get all user account 
+export const getUserAccounts = async () => {
+    return await Users.findAll({
+        where : {roleId : 2}
+    })
+}
+
 export const createInviteCodes = async (code: Partial<ICode>) => {
     return await Codes.create(code)
 }
