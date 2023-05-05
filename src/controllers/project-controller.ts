@@ -88,7 +88,7 @@ export const removeUserFromProject = async (req: express.Request, res: express.R
 // get list projects
 export const listProject = async (req: express.Request, res: express.Response) => {
     try {
-        const list: any = await listProjects()      
+        const list: any = await listProjects()   
         res.json({
             success: true,
             message: 'Get list from project successfully',

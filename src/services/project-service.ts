@@ -91,7 +91,18 @@ export const removeUserFromProjects = async (userId: string, projectId: string) 
 }
 
 export const listProjects = async () => {
-    return await Project.findAll({
+    interface IList {
+        id : string;
+        name : string;
+        slug : string;
+        start_time : Date;
+        end_time : Date;
+        proccess : number;
+        Tasks : any;
+        taskCount : number ;
+        dataValues : any;
+    }
+    const list : IList[] = await Project.findAll({
         attributes: ['id', 'name', 'slug', 'start_date', 'end_date', [db.sequelize.literal('(SELECT COUNT(*) FROM `tasks` WHERE `tasks`.`projectId` = `project`.`id`)'), 'taskCount'],
         ],
         include: [{ model: db.Task, attributes: [] }, {
@@ -106,16 +117,12 @@ export const listProjects = async () => {
             }]
         }]
     })
-    
-    /* return await Tasks.findAll({
-        include: [
-          {
-            model: db.Status,
-            where: { id: 2 }
-          }
-        ]
-      }) */
 
+
+    list.forEach(obj => {
+        obj.dataValues.proccess = obj.Tasks.length / obj.dataValues.taskCount
+    });   
+    return list
 }
 
 

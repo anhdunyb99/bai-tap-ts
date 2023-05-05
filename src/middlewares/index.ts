@@ -5,20 +5,14 @@ const jwt = require('jsonwebtoken')
 export const verifyToken = (req: any, res: any, next: NextFunction) => {
 	const authHeader = req.header('Authorization')
 	const token = authHeader && authHeader.split(' ')[1]
-
-
 	if (!token)
 		return res
 			.status(401)
 			.json({ success: false, message: 'Access token not found' })
 
 	try {
-		const decoded = jwt.verify(token, 'asdsadsadadqwe')
-		console.log('decoded', decoded);
-
+		const decoded = jwt.verify(token,process.env.ACCESS_TOKEN)
 		req.userId = decoded.userId
-
-
 		next()
 	} catch (error) {
 		console.log(error)
@@ -30,8 +24,7 @@ export const checkPermission = async (req: any, res: any, next: NextFunction) =>
 	try {
 		const authHeader = req.header('Authorization')
 		const token = authHeader && authHeader.split(' ')[1]
-		const decoded = jwt.verify(token, "asdsadsadadqwe");
-
+		const decoded = jwt.verify(token,process.env.ACCESS_TOKEN);	
 		const user = await db.User.findByPk(decoded.userId)
 		if (user.roleId == 1) {
 			next()
