@@ -1,9 +1,9 @@
-export default interface ITypesDto {
+export default interface ITypes {
     name: string,
     color: string
 }
 
-export default interface IUpdateTypesDto {
+export default interface IUpdateTypes {
     name: string,
     color: string
 }

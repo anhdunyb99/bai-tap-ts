@@ -1,4 +1,4 @@
-export default interface IRegisterDto {
+export default interface IRegister {
     email: string,
     firstName: string,
     lastName: string,
@@ -6,7 +6,7 @@ export default interface IRegisterDto {
     password: string
 }
 
-export default interface ILoginDto {
+export default interface ILogin {
     username: string,
     password: string
 }

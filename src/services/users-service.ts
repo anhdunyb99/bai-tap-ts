@@ -1,6 +1,6 @@
 import express from 'express'
-import ICreateUserDto from '../dtos/user/user.dto'
-import IUpdateUserDto from '../dtos/user/user.dto'
+import ICreateUser from '../dtos/user/user.dto'
+import IUpdateUser from '../dtos/user/user.dto'
 import IRentBookDto from '../dtos/book/book.dto'
 import ICode from 'dtos/code-interface/code-interface'
 import { getBookByUserId , getBookByIds } from './books-service'
@@ -28,12 +28,12 @@ export const getUserByIds = async (userId: string) => {
     })
 }
 
-export const createUsers = async (createUserDto: Partial<ICreateUserDto>) => {
-    return await Users.create(createUserDto)
+export const createUsers = async (createUser: Partial<ICreateUser>) => {
+    return await Users.create(createUser)
 }
 
-export const updateUsers = async (updateUserDto: Partial<IUpdateUserDto>, userId : string) => {
-    return await Users.update(updateUserDto,{
+export const updateUsers = async (updateUser: Partial<IUpdateUser>, userId : string) => {
+    return await Users.update(updateUser,{
         where : { id : userId}
     })
 }

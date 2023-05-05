@@ -1,4 +1,4 @@
-export default interface IStatusesDto {
+export default interface IStatuses {
     name: string,
     order: number
 }

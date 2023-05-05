@@ -1,4 +1,4 @@
-export default interface ICreateUserDto {
+export default interface ICreateUser {
   email: string,
   firstName: string,
   lastName: string,
@@ -10,7 +10,7 @@ export default interface ICreateUserDto {
   codeId : string,
 }
 
-export default interface IUpdateUserDto {
+export default interface IUpdateUser {
   email: string,
   firstName: string,
   lastName: string,

@@ -118,7 +118,7 @@ export const listProjects = async () => {
         }]
     })
 
-
+    // tinh procress
     list.forEach(obj => {
         obj.dataValues.proccess = obj.Tasks.length / obj.dataValues.taskCount
     });   
@@ -143,6 +143,7 @@ export const getProjectDetails = async (projectId: string) => {
             }]
         }]
     })
+    // tinh process
     detail.dataValues.process = detail.Tasks.length / detail.dataValues.taskCount    
     return detail
 }
