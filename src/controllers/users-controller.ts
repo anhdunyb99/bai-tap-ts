@@ -1,6 +1,9 @@
 
 import express from 'express'
-import { getListUsers, getUserByIds , createUsers ,updateUsers , deleteUsers , rentBooks, createInviteCodes, getUserAccounts } from "../services/users-service"
+import { CodeDto } from '../dtos/code-interface/code.dto'
+import { validate } from 'class-validator';
+import { plainToClass } from 'class-transformer';
+import { getListUsers, getUserByIds, createUsers, updateUsers, deleteUsers, rentBooks, createInviteCodes, getUserAccounts } from "../services/users-service"
 const moment = require('moment');
 // create main model
 
@@ -43,7 +46,7 @@ export const getListUser = async (req: express.Request, res: express.Response) =
 
 export const updateUser = async (req: express.Request, res: express.Response) => {
     try {
-        const updatedUser: any = await updateUsers(req.body,req.params.id)
+        const updatedUser: any = await updateUsers(req.body, req.params.id)
         res.json({
             success: true,
             message: 'Update successfully',
@@ -146,34 +149,40 @@ export const rentBook = async (req: express.Request, res: express.Response) => {
             req.params.bookId,
             req.params.userId,
             req.body
-          );
+        );
         res.json({
             success: true,
             message: 'Rent book successfully',
-            
+
         })
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-     
+
 }
 
 // create invite code
 export const createInviteCode = async (req: express.Request, res: express.Response) => {
     try {
-        await createInviteCodes(req.body)
-        res.json({
-            success: true,
-            message: 'Create invite code successfully',
-            data : req.body
-            
-        })
+        const createCodeDto = plainToClass(CodeDto, req.body);
+        const errors = await validate(createCodeDto);
+        if (errors.length > 0) {
+            return res.status(400).send(errors);
+        } else {
+            await createInviteCodes(req.body)
+            res.json({
+                success: true,
+                message: 'Create invite code successfully',
+                data: req.body
+
+            })
+        }
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-     
+
 }
 
 // get all user account
@@ -184,14 +193,14 @@ export const getUserAccount = async (req: express.Request, res: express.Response
         res.json({
             success: true,
             message: 'Get user account successfully',
-            data : users
-            
+            data: users
+
         })
     } catch (error) {
         console.log(error);
         res.status(500).json({ success: false, message: "Internal server error" });
     }
-     
+
 }
 
 

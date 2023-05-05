@@ -1,8 +1,19 @@
 import express from 'express'
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator'
+import { TypeDto } from '../dtos/type/type.dto';
 import { createTypes, getTypes, hiddenTypes, updateTypes } from '../services/type-service'
 // create type 
 export const createType = async (req: express.Request, res: express.Response) => {
     try {
+        //validate body
+        const typeDto = plainToClass(TypeDto,req.body)
+
+        const errors = await validate(typeDto)
+
+        if(errors.length > 0){
+            return res.status(400).send(errors)
+        }
         const type: any = await createTypes(req.body)
         res.json({
             success: true,
@@ -38,7 +49,14 @@ export const getType = async (req: express.Request, res: express.Response) => {
 
 export const updateType = async (req: express.Request, res: express.Response) => {
     try {
-       
+        //validate body
+        const typeDto = plainToClass(TypeDto,req.body)
+
+        const errors = await validate(typeDto)
+
+        if(errors.length > 0){
+            return res.status(400).send(errors)
+        }
         const type: any = await updateTypes(req.body,req.params.id)
         res.json({
             success: true,

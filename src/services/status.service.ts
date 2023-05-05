@@ -1,8 +1,8 @@
 const db = require('../models/index')
-import IStatuses from "dtos/status/status.dto"
+import { StatusDto } from "../dtos/status/status.dto"
 const Status: any = db.Status
 
-export const createStatuses = async (createStatuse: Partial<IStatuses>) => {
+export const createStatuses = async (createStatuse: Partial<StatusDto>) => {
     return await Status.create(createStatuse)
 }
 
@@ -10,7 +10,7 @@ export const getStatuses = async () => {
     return await Status.findAll({})
 }
 
-export const updateStatuses = async (updateType: Partial<IStatuses>, statusId: string) => {
+export const updateStatuses = async (updateType: Partial<StatusDto>, statusId: string) => {
     return await Status.update(updateType,{where : {
         id : statusId
     }

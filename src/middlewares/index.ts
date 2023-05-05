@@ -1,4 +1,7 @@
 import { NextFunction } from "express"
+import { RequestHandler } from 'express';
+import { validate, validateOrReject } from "class-validator";
+import { plainToInstance } from "class-transformer";
 const db = require('../models/index')
 const jwt = require('jsonwebtoken')
 
@@ -39,4 +42,18 @@ export const checkPermission = async (req: any, res: any, next: NextFunction) =>
 	}
 }
 
+export const validateRequest = (type: any): RequestHandler => {
+	return async (req, res, next) => {
+	  try {
+		const errors = await validate(new type(req.body));
+		if (errors.length > 0) {
+		  res.status(400).json(errors);
+		} else {
+		  next();
+		}
+	  } catch (error) {
+		next(error);
+	  }
+	};
+  };
 

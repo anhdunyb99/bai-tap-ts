@@ -1,11 +1,11 @@
 import express from 'express'
-import ITask from 'dtos/task-interface/task-interface'
+import { TaskDto } from '../dtos/task/task.dto'
 import { includes } from 'lodash'
 
 const db = require('../models/index')
 const Task: any = db.Task
 const Project: any = db.Project
-export const createTasks = async (createTask: Partial<ITask>) => {
+export const createTasks = async (createTask: Partial<TaskDto>) => {
     return await Task.create(createTask)
 }
 
@@ -17,7 +17,7 @@ export const getTaskByProjectIds = async (projectId: string) => {
             {
                 model: db.Task,
                 /* order: [['order', 'ASC']], */
-                attributes: ['id', 'name','order'],
+                attributes: ['id', 'name', 'order'],
                 include: [{
                     model: db.Status,
                     attributes: ['id', 'name'],
@@ -33,18 +33,18 @@ export const getTaskByProjectIds = async (projectId: string) => {
                 ],
             }
         ],
-        
+
     })
-    
+
     /* data.sort((a, b) => a.order - b.order); */
-    listTask.Tasks.sort((a : any,b : any) => a.order - b.order)
+    listTask.Tasks.sort((a: any, b: any) => a.order - b.order)
     return listTask.Tasks
 }
 
 // update task
-export const updateTasks = async (updateTask: Partial<ITask>, taskId : string) => {
-    return await Task.update(updateTask,{
-        where : { id : taskId}
+export const updateTasks = async (updateTask: Partial<TaskDto>, taskId: string) => {
+    return await Task.update(updateTask, {
+        where: { id: taskId }
     })
 }
 
@@ -55,10 +55,10 @@ export const deleteTasks = async (taskId: string) => {
 
 // get personal task
 export const getPersonalTasks = async (userId: string) => {
-    const tasks : any = await Task.findAll({
-        where : { userId},
+    const tasks: any = await Task.findAll({
+        where: { userId },
         include: [{
-            model : db.Status,
+            model: db.Status,
             attributes: ['id', 'name'],
         },
         {
@@ -67,10 +67,10 @@ export const getPersonalTasks = async (userId: string) => {
         },
         {
             model: db.Type,
-            attributes: ['id', 'name','color'],
+            attributes: ['id', 'name', 'color'],
         }
-    ]
+        ]
     })
     return tasks
-    
+
 }

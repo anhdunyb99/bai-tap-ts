@@ -1,10 +1,23 @@
 import express from 'express'
+import { plainToClass } from 'class-transformer';
+import { validate } from 'class-validator'
+import { ProjectDto } from '../dtos/project/project.dto';
 import { addUserToProjects, createProjects, getJoinedProjects, getProjectDetails, getProjects, listProjects, removeUserFromProjects, updateProjects } from '../services/project-service';
 
 // create project
 
 export const createProject = async (req: express.Request, res: express.Response) => {
     try {
+
+        //validate body
+        const projectDto = plainToClass(ProjectDto,req.body)
+
+        const errors = await validate(projectDto)
+
+        if(errors.length > 0){
+            return res.status(400).send(errors)
+        }
+        
         const project: any = await createProjects(req.body)
         res.json({
             success: true,
@@ -53,8 +66,14 @@ export const getProjectById = async (req: express.Request, res: express.Response
 // update project
 export const updateProject = async (req: express.Request, res: express.Response) => {
     try {
-        console.log('123');
+        //validate body
+        const projectDto = plainToClass(ProjectDto,req.body)
 
+        const errors = await validate(projectDto)
+
+        if(errors.length > 0){
+            return res.status(400).send(errors)
+        }
         const project: any = await updateProjects(req.body, req.params.id)
         res.json({
             success: true,

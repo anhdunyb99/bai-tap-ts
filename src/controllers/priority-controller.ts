@@ -1,14 +1,21 @@
 import express from 'express'
 import { createPriorities, getPriorities, hiddenPriorities, updatePriorities } from '../services/priority-service';
-
+import { validate } from 'class-validator';
+import { plainToClass } from 'class-transformer';
+import { PriorityDto } from '../dtos/priority/priority.dto';
 // create priority
 
 export const createPriority= async (req: express.Request, res: express.Response) => {
     try {
-        console.log('123');
-        
-        console.log(req.body);
-        
+        // validate body
+        const priorityDto = plainToClass(PriorityDto, req.body);
+        const errors = await validate(priorityDto)
+
+        if (errors.length > 0) {
+            return res.status(400).send(errors)
+        }
+
+        // all good
         const priority: any = await createPriorities(req.body)
         res.json({
             success: true,
@@ -44,6 +51,13 @@ export const getPriority = async (req: express.Request, res: express.Response) =
 
 export const updatePriority = async (req: express.Request, res: express.Response) => {
     try {
+        //validate body
+        const priorityDto = plainToClass(PriorityDto,req.body)
+        const error = await validate(priorityDto)
+
+        if(error.length > 0) {
+            return res.status(400).send(error)
+        }
         const priority: any = await updatePriorities(req.body,req.params.id)
         res.json({
             success: true,

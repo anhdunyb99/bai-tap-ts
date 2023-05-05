@@ -1,13 +1,13 @@
 const db = require('../models/index')
 const { Op } = require('sequelize');
 /* import IStatusesDto from "dtos/status/status.dto" */
-import IProject from "../dtos/task-interface/task-interface"
+import { ProjectDto } from "../dtos/project/project.dto";
 import { createTasks } from "./task-service"
 const Project: any = db.Project
 const Users: any = db.User
 const Tasks: any = db.Task
 
-export const createProjects = async (createIProject: Partial<IProject>) => {
+export const createProjects = async (createIProject: Partial<ProjectDto>) => {
     return await Project.create(createIProject)
 }
 
@@ -73,7 +73,7 @@ export const getProjects = async (projectId: string) => {
     return project
 }
 
-export const updateProjects = async (updateIProject: Partial<IProject>, projectId: string) => {
+export const updateProjects = async (updateIProject: Partial<ProjectDto>, projectId: string) => {
     return await Project.update(updateIProject, {
         where: {
             id: projectId

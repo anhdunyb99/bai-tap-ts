@@ -2,7 +2,7 @@ import express from 'express'
 import ICreateUser from '../dtos/user/user.dto'
 import IUpdateUser from '../dtos/user/user.dto'
 import IRentBookDto from '../dtos/book/book.dto'
-import ICode from 'dtos/code-interface/code-interface'
+import {CodeDto} from 'dtos/code-interface/code.dto'
 import { getBookByUserId , getBookByIds } from './books-service'
 import { log } from 'console'
 const db = require('../models/index')
@@ -75,6 +75,6 @@ export const getUserAccounts = async () => {
     })
 }
 
-export const createInviteCodes = async (code: Partial<ICode>) => {
+export const createInviteCodes = async (code: Partial<CodeDto>) => {
     return await Codes.create(code)
 }
